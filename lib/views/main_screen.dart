@@ -64,6 +64,7 @@ class MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return AdminScaffold(
         appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.blueAccent,
           title: const Text(
             "Marketku",

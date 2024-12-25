@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:web_marketku/controllers/category_controller.dart';
 
 class CategoriesScreen extends StatefulWidget {
   static const String id = '\categories';
@@ -11,6 +12,7 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final CategoryController categoryController = CategoryController();
   late String title;
 
   dynamic image;
@@ -36,14 +38,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     }
   }
 
-  validateForm() {
+  validateForm() async {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(title),
-          duration: const Duration(seconds: 2), // Durasi toast
-        ),
-      );
+      await categoryController.uploadCategory(
+          context: context, name: title, pickImage: image, pickBanner: banner);
     }
   }
 

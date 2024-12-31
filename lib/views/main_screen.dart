@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
-import 'package:web_marketku/views/sidebar/banners_screen.dart';
 import 'package:web_marketku/views/sidebar/buyers_screen.dart';
 import 'package:web_marketku/views/sidebar/categories_screen.dart';
 import 'package:web_marketku/views/sidebar/orders_screen.dart';
@@ -40,11 +39,6 @@ class MainScreenState extends State<MainScreen> {
       case CategoriesScreen.id:
         setState(() {
           _selectedScreen = CategoriesScreen();
-        });
-        break;
-      case BannersScreen.id:
-        setState(() {
-          _selectedScreen = BannersScreen();
         });
         break;
       case UploadBannerScreen.id:
@@ -105,13 +99,9 @@ class MainScreenState extends State<MainScreen> {
                 route: CategoriesScreen.id,
                 icon: Icons.category_outlined),
             AdminMenuItem(
-                title: "Banners",
-                route: BannersScreen.id,
-                icon: Icons.branding_watermark),
-            AdminMenuItem(
                 title: "Upload Banners",
                 route: UploadBannerScreen.id,
-                icon: CupertinoIcons.add),
+                icon: CupertinoIcons.upload_circle),
             AdminMenuItem(
                 title: "Products",
                 route: ProductsScreen.id,

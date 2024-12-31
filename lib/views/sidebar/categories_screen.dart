@@ -1,6 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:web_marketku/controllers/category_controller.dart';
+import 'package:web_marketku/models/category.dart';
+import 'package:web_marketku/widgets/category_widget.dart';
 
 class CategoriesScreen extends StatefulWidget {
   static const String id = '\categories';
@@ -14,6 +16,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final CategoryController categoryController = CategoryController();
   late String title;
+  late Future<List<Category>> categoryData;
 
   dynamic image;
   dynamic banner;
@@ -41,8 +44,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   validateForm() async {
     if (_formKey.currentState!.validate()) {
       await categoryController.uploadCategory(
-          context: context, name: title, pickImage: image, pickBanner: banner);
+        context: context,
+        name: title,
+        pickImage: image,
+        pickBanner: banner,
+        onSuccess: () {
+          setState(() {
+            categoryData = CategoryController().loadCategory();
+          });
+        },
+      );
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    categoryData = CategoryController().loadCategory();
   }
 
   @override
@@ -136,9 +154,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 const SizedBox(
                   width: 16,
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
                 ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.amber),
@@ -181,9 +196,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 const SizedBox(
                   width: 16,
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
                 ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.amber),
@@ -200,7 +212,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: Row(
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        image = null;
+                        banner = null;
+                      });
+                    },
                     child: const Text(
                       "Cancel",
                       style: TextStyle(color: Colors.redAccent),
@@ -225,7 +242,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: const Divider(
                 color: Colors.grey,
               ),
-            )
+            ),
+            CategoryWidget(categoryData: categoryData)
           ],
         ),
       ),

@@ -243,7 +243,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 color: Colors.grey,
               ),
             ),
-            CategoryWidget(categoryData: categoryData)
+            CategoryWidget(
+              categoryData: categoryData,
+              isNotSub: true,
+              onCategorySelect: (categorySelected) {},
+            )
           ],
         ),
       ),

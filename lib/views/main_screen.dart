@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:web_marketku/views/sidebar/buyers_screen.dart';
 import 'package:web_marketku/views/sidebar/categories_screen.dart';
+import 'package:web_marketku/views/sidebar/categories_sub_screen.dart';
 import 'package:web_marketku/views/sidebar/orders_screen.dart';
 import 'package:web_marketku/views/sidebar/products_screen.dart';
 import 'package:web_marketku/views/sidebar/upload_banner_screen.dart';
@@ -39,6 +40,11 @@ class MainScreenState extends State<MainScreen> {
       case CategoriesScreen.id:
         setState(() {
           _selectedScreen = CategoriesScreen();
+        });
+        break;
+      case CategoriesSubScreen.id:
+        setState(() {
+          _selectedScreen = CategoriesSubScreen();
         });
         break;
       case UploadBannerScreen.id:
@@ -98,6 +104,10 @@ class MainScreenState extends State<MainScreen> {
                 title: "Categories",
                 route: CategoriesScreen.id,
                 icon: Icons.category_outlined),
+            AdminMenuItem(
+                title: "Categories Sub",
+                route: CategoriesSubScreen.id,
+                icon: Icons.view_agenda_outlined),
             AdminMenuItem(
                 title: "Upload Banners",
                 route: UploadBannerScreen.id,

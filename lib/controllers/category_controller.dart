@@ -39,12 +39,6 @@ class CategoryController {
           "Content-Type": "application/json; charset=UTF-8"
         },
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.body),
-          duration: const Duration(seconds: 2), // Durasi toast
-        ),
-      );
 
       httpResponse(
         response: response,
